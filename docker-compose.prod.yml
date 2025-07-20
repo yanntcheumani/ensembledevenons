@@ -1,15 +1,31 @@
 version: '3.8'
-
 services:
+  db:
+    image: postgres:15
+    env_file: .env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
   backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile        # votre Dockerfile « prod »
+    env_file: .env
     ports:
       - "8000:8000"
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
-    # pas de volumes en prod, tout est baked dans l'image
+    depends_on:
+      - db
 
   frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile        # votre Dockerfile multi-stage pour prod
     ports:
       - "80:80"
-    # l'image multi-stage build fournit directement le dist → nginx
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
 # docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
 # docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
