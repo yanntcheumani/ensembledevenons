@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+asyncpg      # si vous utilisez PostgreSQL en async
+SQLAlchemy>=1.4
+
+# Pour les tests
+pytest
+pytest-asyncio
+pytest-cov

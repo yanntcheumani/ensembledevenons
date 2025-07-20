@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  backend:
+    ports:
+      - "8000:8000"
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    # pas de volumes en prod, tout est baked dans l'image
+
+  frontend:
+    ports:
+      - "80:80"
+    # l'image multi-stage build fournit directement le dist → nginx
+# docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+# docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
