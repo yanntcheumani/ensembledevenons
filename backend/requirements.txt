@@ -2,6 +2,7 @@ fastapi
 uvicorn[standard]
 asyncpg      # si vous utilisez PostgreSQL en async
 SQLAlchemy>=1.4
+pydantic[email]
 
 # Pour les tests
 pytest

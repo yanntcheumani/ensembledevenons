@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from .database import engine, Base
-from .routers import items, users  # on pourra ajouter users.py
+from .routers import items  # on pourra ajouter users.py
 
-app = FastAPI(title="API modulable", version="1.0.0")
+app = FastAPI(title="API END", version="1.0.0")
 
 @app.on_event("startup")
 async def on_startup():

@@ -1,0 +1,10 @@
+# frontend/Dockerfile.dev
+FROM node:20-alpine
+WORKDIR /app
+
+# Installe les dépendances (sera mis en cache tant que package*.json ne change pas)
+COPY package.json package-lock.json ./
+RUN npm ci
+
+EXPOSE 5173
+CMD ["npm", "run", "dev"]
